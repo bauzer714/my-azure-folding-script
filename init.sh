@@ -5,8 +5,11 @@ sudo apt-get -y update;
 sudo apt-get -y upgrade;
 echo "=========Installing dependencies================";
 sudo apt -y install bzip2;
-echo "=========Moving to working directory================";
-cd /home/phpsudo;
+echo "=========Show working directory================";
+pwd;
+echo $AZ_BATCH_NODE_ROOT_DIR;
+mkdir runner
+cd runner
 pwd;
 echo "=========Clean up working directory================";
 rm -f latest*;
