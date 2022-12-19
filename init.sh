@@ -7,14 +7,11 @@ echo "=========Installing dependencies================";
 sudo apt -y install bzip2;
 echo "=========Show working directory================";
 pwd;
-echo $AZ_BATCH_NODE_ROOT_DIR;
+echo "=========Clean up working directory================";
+rm -rf runner
 mkdir runner
 cd runner
 pwd;
-echo "=========Clean up working directory================";
-rm -f latest*;
-rm -rf fclient;
-rm -rf fahclient*;
 echo "=========Download fahclient================";
 wget https://download.foldingathome.org/releases/public/release/fahclient/debian-stable-64bit/v7.6/latest.tar.bz2;
 echo "=========Prepare subdirectories================";
