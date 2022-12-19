@@ -8,18 +8,18 @@ sudo apt -y install bzip2;
 echo "=========Moving to working directory================";
 cd /home/phpsudo;
 pwd;
+echo "=========Clean up working directory================";
+rm -f latest*;
+rm -rf fclient;
+rm -rf fahclient*;
 echo "=========Download fahclient================";
 wget https://download.foldingathome.org/releases/public/release/fahclient/debian-stable-64bit/v7.6/latest.tar.bz2;
 echo "=========Prepare subdirectories================";
-rm -f latest*;
-rm -rf fclient;
 mkdir fclient;
 tar jxf lat*;
 cp -r fah*/* fclient;
 cd fclient;
-
 echo "=========Build config================";
-
 echo '<config>' > config.xml;
 echo '  <user value="bauzer714"/> <!-- Enter your user name here -->' >> config.xml;
 echo '  <team value="47180"/>         <!-- Your team number -->' >> config.xml;
