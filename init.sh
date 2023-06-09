@@ -12,6 +12,12 @@ sudo apt-get install -y nginx
 sudo apt-get install -y php-8.2
 echo "=========Show working directory================";
 pwd;
+echo "=========Build up the website=============";
+echo "--- nginx config and restart"
+sudo cp -f ./self-service-web/.config/default /etc/nginx/sites-available/default
+sudo service nginx restart
+echo "--- copying files to web dir"
+sudo cp -rf ./self-service-web/* /var/www/html
 echo "=========Clean up working directory================";
 rm -rf runner
 mkdir runner
@@ -41,18 +47,10 @@ echo "=========Start working================";
 
 ./FAHClient > /dev/null 2>&1 &
 
-echo "=========Build up the website=============";
-
-echo "--- nginx config and restart"
-sudo cp -f ./self-service-web/.config/default /etc/nginx/sites-available/default
-sudo service nginx restart
-
-echo "--- copying files to web dir"
-sudo cp -rf ./self-service-web/* /var/www/html
-
-echo "--- exposing the log file"
-
-sudo ln /mnt/batch/tasks/startup/wd/runner/fclient/log.txt /mnt/
-sudo chmod +r /mnt/log.txt --verbose
+echo "=========Create hard link of log file===============";
+#Give the fah client a few seconds to create the log file
+sleep 10
+sudo ln /mnt/batch/tasks/startup/wd/runner/fclient/log.txt /mnt/;
+sudo chmod +r /mnt/log.txt --verbose;
 
 echo "=========Finished================";
