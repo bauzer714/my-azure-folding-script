@@ -1,27 +1,27 @@
 #!/usr/bin/env bash
 
 echo "=========Add the self-service website================";
-sudo add-apt-repository ppa:ondrej/php -y
+sudo add-apt-repository ppa:ondrej/php -y;
 echo "=========Attempting to update and upgrade================";
 sudo apt-get -y update;
 sudo apt-get -y upgrade;
 echo "=========Installing dependencies================";
 sudo apt-get -y install bzip2;
-echo "=========Installing the website self-service dependencies======"
-sudo apt-get install -y nginx
-sudo apt-get install -y php-8.2
+echo "=========Installing the website self-service dependencies======";
+sudo apt-get install -y nginx;
+sudo apt-get install -y php8.2-fpm;
 echo "=========Show working directory================";
 pwd;
 echo "=========Build up the website=============";
-echo "--- nginx config and restart"
-sudo cp -f ./self-service-web/.config/default /etc/nginx/sites-available/default
-sudo service nginx restart
-echo "--- copying files to web dir"
-sudo cp -rf ./self-service-web/* /var/www/html
+echo "--- nginx config and restart";
+sudo cp -f ./self-service-web/.config/default /etc/nginx/sites-available/default;
+sudo service nginx restart;
+echo "--- copying files to web dir";
+sudo cp -rf ./self-service-web/* /var/www/html;
 echo "=========Clean up working directory================";
-rm -rf runner
-mkdir runner
-cd runner
+rm -rf runner;
+mkdir runner;
+cd runner;
 pwd;
 echo "=========Download fahclient================";
 wget https://download.foldingathome.org/releases/public/release/fahclient/debian-stable-64bit/v7.6/latest.tar.bz2;
@@ -49,8 +49,7 @@ echo "=========Start working================";
 
 echo "=========Create hard link of log file===============";
 #Give the fah client a few seconds to create the log file
-sleep 10
+sleep 10;
 sudo ln /mnt/batch/tasks/startup/wd/runner/fclient/log.txt /mnt/;
 sudo chmod +r /mnt/log.txt --verbose;
-
 echo "=========Finished================";
