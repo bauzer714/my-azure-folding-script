@@ -1,10 +1,15 @@
 #!/usr/bin/env bash
 
+echo "=========Add the self-service website================";
+sudo add-apt-repository ppa:ondrej/php -y
 echo "=========Attempting to update and upgrade================";
 sudo apt-get -y update;
 sudo apt-get -y upgrade;
 echo "=========Installing dependencies================";
-sudo apt -y install bzip2;
+sudo apt-get -y install bzip2;
+echo "=========Installing the website self-service dependencies======"
+sudo apt-get install -y nginx
+sudo apt-get install -y php-8.2
 echo "=========Show working directory================";
 pwd;
 echo "=========Clean up working directory================";
@@ -35,5 +40,19 @@ echo '</config>' >> config.xml;
 echo "=========Start working================";
 
 ./FAHClient > /dev/null 2>&1 &
+
+echo "=========Build up the website=============";
+
+echo "--- nginx config and restart"
+sudo cp -f ./self-service-web/.config/default /etc/nginx/sites-available/default
+sudo service nginx restart
+
+echo "--- copying files to web dir"
+sudo cp -rf ./self-service-web/* /var/www/html
+
+echo "--- exposing the log file"
+
+sudo ln /mnt/batch/tasks/startup/wd/runner/fclient/log.txt /mnt/
+sudo chmod +r /mnt/log.txt --verbose
 
 echo "=========Finished================";
