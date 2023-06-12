@@ -18,6 +18,9 @@ sudo cp -f ./self-service-web/.config/default /etc/nginx/sites-available/default
 sudo service nginx restart;
 echo "--- copying files to web dir";
 sudo cp -rf ./self-service-web/* /var/www/html;
+#DISABLE IF SERVER IS PUBLICLY ACCESSIBLE
+echo "--- giving access to reboot the server";
+echo '%www-data ALL=NOPASSWD: /sbin/shutdown' | sudo tee -a /etc/sudoers;
 echo "=========Clean up working directory================";
 rm -rf runner;
 mkdir runner;
@@ -50,6 +53,7 @@ echo "=========Start working================";
 echo "=========Create hard link of log file===============";
 #Give the fah client a few seconds to create the log file
 sleep 10;
+sudo rm -rf /mnt/log.txt --verbose;
 sudo ln /mnt/batch/tasks/startup/wd/runner/fclient/log.txt /mnt/;
 sudo chmod +r /mnt/log.txt --verbose;
 echo "=========Finished================";
