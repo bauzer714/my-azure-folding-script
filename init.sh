@@ -48,7 +48,7 @@ echo '</config>' >> config.xml;
 
 echo "=========Start working================";
 
-./FAHClient > /dev/null 2>&1 &
+./fah-client > /dev/null 2>&1 &
 
 echo "=========Create hard link of log file===============";
 #Give the fah client a few seconds to create the log file
