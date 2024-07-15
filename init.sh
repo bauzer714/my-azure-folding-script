@@ -50,12 +50,22 @@ sudo apt-get -y install python3-pip
 sudo pip install --no-input lufah
 echo "=========Start working================";
 ./fah-client > /dev/null 2>&1 &
-echo "========(BETA) use utility to start folding===========";
-lufah . fold
 echo "=========Create hard link of log file===============";
 #Give the fah client a few seconds to create the log file
 sleep 10;
 sudo rm -rf /mnt/log.txt --verbose;
 sudo ln /mnt/batch/tasks/startup/wd/runner/fclient/log.txt /mnt/;
 sudo chmod +r /mnt/log.txt --verbose;
+echo "========(BETA) use utility to start folding===========";
+#give the fah client even a bit longer to get started
+echo "Sleeping for some time";
+sleep 15;
+echo "...still sleeping";
+sleep 15;
+echo "...still sleeping";
+sleep 15;
+echo "...still sleeping";
+sleep 15;
+echo "done sleeping";
+lufah . fold
 echo "=========Finished================";
