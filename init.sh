@@ -38,7 +38,6 @@ echo '<config>' > config.xml;
 echo '  <user value="bauzer714"/> <!-- Enter your user name here -->' >> config.xml;
 echo '  <team value="47180"/>         <!-- Your team number -->' >> config.xml;
 echo '  <passkey value="1c49a968f7733ae91c49a968f7733ae9"/>       <!-- 32 hexadecimal characters if provided -->' >> config.xml;
-echo '  <account-token value="yEmH5yElTm8hYTm8L08PtL08E96ugE-HhIZ-3hIVWwQ" />' >> config.xml
 echo '  <cpus value="@@MAX@@" />' >> config.xml
 echo '</config>' >> config.xml;
 echo "================Modify config================";
