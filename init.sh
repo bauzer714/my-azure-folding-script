@@ -38,18 +38,20 @@ echo '<config>' > config.xml;
 echo '  <user value="bauzer714"/> <!-- Enter your user name here -->' >> config.xml;
 echo '  <team value="47180"/>         <!-- Your team number -->' >> config.xml;
 echo '  <passkey value="1c49a968f7733ae91c49a968f7733ae9"/>       <!-- 32 hexadecimal characters if provided -->' >> config.xml;
-echo '  <power value="full"/>' >> config.xml;
-echo '  <gpu value="true"/>         <!-- If true, attempt to autoconfigure GPUs -->' >> config.xml;
-echo '  <fold-anon value="false"/>' >> config.xml;
-echo '  <checkpoint value="5" />' >> config.xml;
-echo '  <respawn value="true" />' >> config.xml;
-echo '  <fork value="true" />' >> config.xml;
+echo '  <account-token value="yEmH5yElTm8hYTm8L08PtL08E96ugE-HhIZ-3hIVWwQ" />' >> config.xml
+echo '  <cpus value="@@MAX@@" />' >> config.xml
 echo '</config>' >> config.xml;
-
+echo "================Modify config================";
+SEARCH="@@MAX@@"
+REPLACE=$(nproc)
+sed -i "s/$SEARCH/$REPLACE/" config.xml
+echo "========(BETA) install start folding dependency===========";
+sudo apt-get -y install python3-pip
+sudo pip install lufah
 echo "=========Start working================";
-
 ./fah-client > /dev/null 2>&1 &
-
+echo "========(BETA) use utility to start folding===========";
+lufah . fold
 echo "=========Create hard link of log file===============";
 #Give the fah client a few seconds to create the log file
 sleep 10;
