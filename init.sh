@@ -27,7 +27,7 @@ mkdir runner;
 cd runner;
 pwd;
 echo "=========Download fahclient================";
-wget https://download.foldingathome.org/releases/public/release/fahclient/debian-stable-64bit/v7.6/latest.tar.bz2;
+wget https://download.foldingathome.org/releases/public/fah-client/debian-10-64bit/release/latest.tar.bz2
 echo "=========Prepare subdirectories================";
 mkdir fclient;
 tar jxf lat*;
