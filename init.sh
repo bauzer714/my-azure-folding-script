@@ -10,6 +10,7 @@ sudo apt-get -y install bzip2;
 echo "=========Installing the website self-service dependencies======";
 sudo apt-get install -y nginx;
 sudo apt-get install -y php8.3-fpm;
+sudo apt-get install -y php-zip
 echo "=========Show working directory================";
 pwd;
 echo "=========Build up the website=============";
