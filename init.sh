@@ -39,6 +39,8 @@ echo '  <user value="bauzer714"/> <!-- Enter your user name here -->' >> config.
 echo '  <team value="47180"/>         <!-- Your team number -->' >> config.xml;
 echo '  <passkey value="1c49a968f7733ae91c49a968f7733ae9"/>       <!-- 32 hexadecimal characters if provided -->' >> config.xml;
 echo '  <cpus value="@@MAX@@" />' >> config.xml
+echo '  <log-rotate-period value="0" /> <!--  Rotate log once every so many seconds. None if zero -->' >> config.xml
+echo '  <log-rotate value="false" />  <!-- Rotate log files on each run -->' >> config.xml
 echo '</config>' >> config.xml;
 echo "================Modify config================";
 SEARCH="@@MAX@@"
