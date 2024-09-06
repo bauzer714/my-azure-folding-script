@@ -69,5 +69,5 @@ sleep 15;
 echo "...still sleeping";
 sleep 15;
 echo "done sleeping";
-lufah . fold
+lufah fold
 echo "=========Finished================";
