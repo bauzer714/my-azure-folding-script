@@ -34,10 +34,20 @@ function getLogContent() : string|bool {
 	return base64_encode(file_get_contents($zipfilelocation));
 }
 
+function getNodeState() : object|bool {
+  try {
+       $lufahStateString = shell_exec('lufah -a "." state');
+       return json_decode($lufahStateString, flags: JSON_THROW_ON_ERROR);
+  } catch (Exception $ex) {
+       return false;
+   }
+}
+
 $response = (object)array(
    'uptime' => shell_exec('who -b'),
    'reboot' => doRebootIfNeeded(),
    'isContentArchived' => isLogTypeArchive(),
+   'nodeState' => getNodeState(),	
    'content' => getLogContent(),
 );
 header('Content-Type: application/json');
