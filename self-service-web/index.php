@@ -9,14 +9,36 @@ function doRebootIfNeeded() : bool {
    return false;
 }
 
+function getParamLogType() : string {
+   return strtolower(trim($_GET['logtype'] ?? 'unset'));
+}
+
 function isLogTypeArchive() : bool {
-   $type = strtolower(trim($_GET['logtype'] ?? ''));
-   return $type === 'archive';
+   return getParamLogType() === 'archive';
+}
+
+function isLogTypeLastLine() : bool {
+   return getParamLogType() === 'lastline';
+}
+
+function isLogTypeNone() : bool {
+   return getParamLogType() === 'none';
 }
 
 function getLogContent() : string|bool {
-   $logfilecontents = file_get_contents('/mnt/log.txt');
-   if ($logfilecontents === false || !isLogTypeArchive()) {
+   if (isLogTypeNone()) {
+	   return '';
+   }
+   $logfile = '/mnt/log.txt';
+   if (!file_exists($logfile)) {
+       return false;
+   }
+   if (isLogTypeLastLine()) {
+	return shell_exec("tail -1 $logfile");
+   }
+	
+   $logfilecontents = file_get_contents($logfile);
+   if (!isLogTypeArchive()) {
       return $logfilecontents;
    }
 	$archivelogfilename = "log.txt";
@@ -46,8 +68,8 @@ function getNodeState() : object|bool {
 $response = (object)array(
    'uptime' => shell_exec('who -b'),
    'reboot' => doRebootIfNeeded(),
-   'isContentArchived' => isLogTypeArchive(),
-   'nodeState' => getNodeState(),	
+   'nodeState' => getNodeState(),   
+   'logType' => getParamLogType(),
    'content' => getLogContent(),
 );
 header('Content-Type: application/json');
