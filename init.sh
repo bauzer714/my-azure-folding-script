@@ -50,6 +50,8 @@ sed -i "s/$SEARCH/$REPLACE/" config.xml
 echo "========(BETA) install start folding dependency===========";
 sudo apt-get -y install python3-pip
 sudo pip install --no-input lufah
+sudo pip install lufah --upgrade
+lufah --version
 echo "=========Start working================";
 ./fah-client > /dev/null 2>&1 &
 echo "=========Create hard link of log file===============";
@@ -69,5 +71,5 @@ sleep 15;
 echo "...still sleeping";
 sleep 15;
 echo "done sleeping";
-lufah fold
+lufah -a "." fold
 echo "=========Finished================";
