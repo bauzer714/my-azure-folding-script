@@ -11,6 +11,7 @@ echo "=========Installing the website self-service dependencies======";
 sudo apt-get install -y nginx;
 sudo apt-get install -y php8.3-fpm;
 sudo apt-get install -y php-zip
+
 echo "=========Show working directory================";
 pwd;
 echo "=========Build up the website=============";
@@ -47,11 +48,13 @@ echo "================Modify config================";
 SEARCH="@@MAX@@"
 REPLACE=$(nproc)
 sed -i "s/$SEARCH/$REPLACE/" config.xml
-echo "========(BETA) install start folding dependency===========";
+echo "========install folding information dependency===========";
 sudo apt-get -y install python3-pip
 sudo pip install --no-input lufah
 sudo pip install lufah --upgrade
 lufah --version
+#start folding code
+sudo snap install astral-uv --classic
 echo "=========Start working================";
 ./fah-client > /dev/null 2>&1 &
 echo "=========Create hard link of log file===============";
@@ -60,7 +63,7 @@ sleep 10;
 sudo rm -rf /mnt/log.txt --verbose;
 sudo ln /mnt/batch/tasks/startup/wd/runner/fclient/log.txt /mnt/;
 sudo chmod +r /mnt/log.txt --verbose;
-echo "========(BETA) use utility to start folding===========";
+echo "========(BETA) use random utility to start folding===========";
 #give the fah client even a bit longer to get started
 echo "Sleeping for some time";
 sleep 15;
@@ -71,5 +74,6 @@ sleep 15;
 echo "...still sleeping";
 sleep 15;
 echo "done sleeping";
-lufah -a "." fold
+#lufah -a "." fold
+uvx --with websockets==12 lufah fold
 echo "=========Finished================";
