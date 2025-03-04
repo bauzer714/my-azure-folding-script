@@ -49,8 +49,8 @@ REPLACE=$(nproc)
 sed -i "s/$SEARCH/$REPLACE/" config.xml
 echo "========(BETA) install start folding dependency===========";
 sudo apt-get -y install python3-pip
-sudo pip install --no-input lufah
-sudo pip install lufah --upgrade
+sudo pip install --no-input lufah --break-system-packages
+sudo pip install lufah --upgrade --break-system-packages
 lufah --version
 echo "=========Start working================";
 ./fah-client > /dev/null 2>&1 &
